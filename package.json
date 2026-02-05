@@ -1,0 +1,12 @@
+{
+  "name": "gruppenplatz-challenge",
+  "scripts": {
+    "test": "playwright test",
+    "test:allure": "playwright test --reporter=line,allure-playwright && allure generate && allure open"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.1",
+    "allure-playwright": "^3.0.0",
+    "allure": "^3.0.0"
+  }
+}
