@@ -34,7 +34,7 @@ pipeline {
     stage('Generate Allure Report') {
       steps {
         sh '''
-          npx allure generate allure-results -o allure-report --clean
+          npx allure generate allure-results -o allure-report
           chmod -R 755 allure-report
         '''
       }
@@ -43,14 +43,7 @@ pipeline {
 
   post {
     always {
-      publishHTML([
-        allowMissing: false,
-        alwaysLinkToLastBuild: true,
-        keepAll: true,
-        reportDir: 'allure-report',
-        reportFiles: 'index.html',
-        reportName: 'Allure Report'
-      ])
+      archiveArtifacts artifacts: 'allure-report/**/*', allowEmptyArchive: true
       cleanWs()
     }
   }
