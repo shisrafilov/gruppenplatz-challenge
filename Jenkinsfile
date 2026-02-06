@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'mcr.microsoft.com/playwright:v1.42.0-jammy'
+      image 'mcr.microsoft.com/playwright:v1.58.1-jammy'
       args '--ipc=host --memory=768m --memory-swap=2g -u root'
     }
   }
