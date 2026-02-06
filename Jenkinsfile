@@ -8,6 +8,10 @@ pipeline {
 
   tools {nodejs "nodejs"}
 
+  environment {
+    CI = 'true'
+  }
+
   stages {
 
     stage('Install') {
@@ -26,14 +30,26 @@ pipeline {
         sh 'npm run test:allure'
       }
     }
+
+    stage('Generate Allure Report') {
+      steps {
+        sh '''
+          npx allure generate allure-results -o allure-report --clean
+          chmod -R 755 allure-report
+        '''
+      }
+    }
   }
 
   post {
     always {
-      allure([
-        includeProperties: false,
-        jdk: '',
-        results: [[path: 'allure-results']]
+      publishHTML([
+        allowMissing: false,
+        alwaysLinkToLastBuild: true,
+        keepAll: true,
+        reportDir: 'allure-report',
+        reportFiles: 'index.html',
+        reportName: 'Allure Report'
       ])
       cleanWs()
     }
