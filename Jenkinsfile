@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'mcr.microsoft.com/playwright:v1.42.0-jammy'
+      args '--ipc=host'
+    }
+  }
 
   tools {nodejs "nodejs"}
 
@@ -8,7 +13,6 @@ pipeline {
     stage('Install') {
       steps {
         sh 'npm ci'
-        sh 'npx playwright install'
       }
     }
 
@@ -31,6 +35,3 @@ pipeline {
     }
   }
 }
-
-
-
