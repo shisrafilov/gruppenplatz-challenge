@@ -26,17 +26,16 @@ pipeline {
         sh 'npm run test:allure'
       }
     }
-
-    stage('Generate report') {
-      steps {
-        sh 'npx allure generate ./allure-results -o ./allure-report --clean'
-      }
-    }
   }
 
   post {
     always {
-      archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
+      allure([
+        includeProperties: false,
+        jdk: '',
+        results: [[path: 'allure-results']]
+      ])
+      cleanWs()
     }
   }
 }

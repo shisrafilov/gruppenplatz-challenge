@@ -2,7 +2,7 @@
   "name": "gruppenplatz-challenge",
   "scripts": {
     "test": "playwright test",
-    "test:allure": "playwright test --reporter=line,allure-playwright && allure generate && allure open"
+    "test:allure": "playwright test --reporter=line,allure-playwright"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.1",
