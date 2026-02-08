@@ -33,7 +33,6 @@ export class StartPage extends BasePage {
 
     async openStart() {
         await this.open();
-        await this.mapContainer.waitFor({state: 'visible', timeout: 10000});
     }
 
     async search(text: string) {
@@ -106,7 +105,7 @@ export class StartPage extends BasePage {
         expect(currentPage).toBe(pageNumber);
     }
 
-    async expectResultCardHighlighted(index: number = 0) {
+    async expectResultCardHighlighted() {
         const selectedCard = this.page.locator('.map-list-item.selected-item');
         await expect(selectedCard).toBeVisible();
     }
