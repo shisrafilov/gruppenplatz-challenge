@@ -7,7 +7,9 @@ type Fixtures = {
 
 export const test = base.extend<Fixtures>({
     startPage: async ({page}, use) => {
-        await use(new StartPage(page));
+        const startPage = new StartPage(page);
+        await startPage.openStart();
+        await use(startPage);
     }
 });
 

@@ -14,8 +14,4 @@ export class BasePage {
     async open() {
         await this.page.goto('');
     }
-
-    async title() {
-        await this.page.title()
-    }
 }
